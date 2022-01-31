@@ -22,7 +22,7 @@ node {
             def app = docker.build("naturalett/playground:${commit_id}", '.').push()
           }
           sh 'pwd'
-          echo 'hello'
+          echo 'hello2'
      }
    }
    stage('docker run') {
