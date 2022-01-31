@@ -2,6 +2,7 @@ node {
    def commit_id
    stage('step a') {
      checkout scm
+
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
    }
@@ -21,9 +22,13 @@ node {
             def app = docker.build("naturalett/playground:${commit_id}", '.').push()
           }
           sh 'pwd'
+          echo 'hello'
      }
    }
    stage('docker run') {
+        app.inside {
+          sh 'echo hello world'
+        }
      sh label: '', script: """docker rm docker_test || true
       docker run --rm -tid --name docker_test -p 3000 naturalett/playground:${commit_id}
       docker kill docker_test
