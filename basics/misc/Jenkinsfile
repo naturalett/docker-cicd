@@ -23,6 +23,7 @@ node {
           }
           sh 'pwd'
           echo 'hello2'
+          echo 'hello3'
      }
    }
    stage('docker run') {
